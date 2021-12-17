@@ -13,7 +13,7 @@ const App = () => {
       
         <h1>Bloomer Eats</h1>
         <h2>Eat like a real Bloomeranian!</h2>
-
+      <nav>
         <Link to='/'>
         <button id='order-pizza'>
           Home
@@ -29,11 +29,11 @@ const App = () => {
       <Link to='/complete'>
         Complete Order
       </Link>
+    </nav>
 
       <Switch>
-        <Route path='/'/>
-        <Route path='/pizza' component={Form}>
-        </Route>
+        
+        <Route path='/pizza' component={Form}></Route>
       </Switch>
 
     </div>
