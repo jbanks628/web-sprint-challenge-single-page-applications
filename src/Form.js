@@ -25,7 +25,7 @@ const initialVal = {
 
 const Form = (props) => {
     const [form, setForm] = useState(initialVal);
-    const [facts, setFacts] = useState(true);
+    const [disabled, setDisabled] = useState(true);
     const [err, setErr] = useState({
         name: '',
         size: '',
@@ -36,11 +36,13 @@ const Form = (props) => {
         specialIn: ''
     })
     
-    // useEffect(() => {
-    //     formSchema.facts(form)
-    //     .then(e => setFacts(!e)
-    //     )}, [form]
-    //     );
+    useEffect(() => {
+        formSchema.isValid(form)
+        .then((isValid) => {
+            setDisabled(!isValid)
+        })
+        }, [form]
+        );
 
     const valid = e => {
         yup.reach(formSchema, e.target.name)
@@ -64,9 +66,9 @@ const Form = (props) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        axios.post('https://reqres.in/api/orders', form)
-        .then(res => console.log('helloworld', res))
-        .catch(err => console.error(err));
+        // axios.post('https://reqres.in/api/orders', form)
+        // .then(res => console.log('helloworld', res))
+        // .catch(err => console.error(err));
         setForm(initialVal)
     };
 
@@ -87,13 +89,13 @@ const Form = (props) => {
                 onChange={onChange}
                 />
 
-                    <br/>
+                <br/>
 
             <label htmlFor='size-dropdown'>
                 Pizza Size
             </label>
                 <select id='size-dropdown' 
-                onChange={e =>onChange(e.target.name, e.target.value)}
+                onChange={onChange}
                 name='size'>
                     <option value='Choose'>
                         Choose a size
@@ -186,7 +188,7 @@ const Form = (props) => {
             id='order-button'
             type='submit'
             value={onSubmit}
-            disabled={facts}
+            disabled={disabled}
             onChange={onChange}
             name='submit'
             />
