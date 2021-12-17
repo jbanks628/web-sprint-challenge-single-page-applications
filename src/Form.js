@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import * as yup from 'yup';
 
 
@@ -46,11 +46,11 @@ const Form = (props) => {
 
     const valid = e => {
         yup.reach(formSchema, e.target.name)
-        .valid(e.target.value)
+        .validate(e.target.value)
         .then(v => {setErr({...err, [e.target.name]: ''})
     })
     .catch(error => {
-        console.error(error.errors)
+        console.log(error.errors)
         setErr({
             ...err, [e.target.name]: error.errors[0]
         })
@@ -66,9 +66,6 @@ const Form = (props) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        // axios.post('https://reqres.in/api/orders', form)
-        // .then(res => console.log('helloworld', res))
-        // .catch(err => console.error(err));
         setForm(initialVal)
     };
 

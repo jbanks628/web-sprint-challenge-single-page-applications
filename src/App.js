@@ -20,8 +20,8 @@ const App = () => {
        </button>
       </Link>
 
-      <Link to='/pizza' id='order-pizza'>
-        <button>
+      <Link to='/pizza'>
+        <button id='order-pizza'>
           Build-A-Pizza
         </button>
       </Link>
